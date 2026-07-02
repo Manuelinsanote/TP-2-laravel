@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EquipoController;  // ← AGREGAR ESTO
+
+// ==========================================
+// RUTAS DEL TP1 
+// ==========================================
 
 // 1- Ruta raiz
 Route::get('/', function () {
@@ -12,9 +17,7 @@ Route::get('/', function () {
 
 // 2- Ruta /catalogo con nombre 'catalogo'
 Route::get('/catalogo', function () {
-    // Array con al menos 3
     $insumos = [
-
         ['nombre' => 'Arduino Uno',    'precio' => 15000],
         ['nombre' => 'Estaño',         'precio' => 3500],
         ['nombre' => 'Protoboard',     'precio' => 4500],
@@ -28,3 +31,13 @@ Route::get('/catalogo', function () {
 Route::get('/insumo/{id}', function ($id) {
     return view('detalle', compact('id'));
 })->name('detalle');
+
+// ==========================================
+// RUTAS DEL TP2 
+// ==========================================
+
+// Ruta para mostrar el listado de equipos
+Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos.index');
+
+// Ruta para guardar un nuevo equipo
+Route::post('/equipos/guardar', [EquipoController::class, 'store'])->name('equipos.store');
